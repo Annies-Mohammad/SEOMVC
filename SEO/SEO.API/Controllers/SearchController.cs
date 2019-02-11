@@ -8,9 +8,9 @@ namespace SEO.API.Controllers
     [Route("Search")]
     public class SearchController : Controller
     {
-        private readonly ISearchURL _searchUrl;
+        private readonly ISearchUrl _searchUrl;
 
-        public SearchController(ISearchURL searchUrl)
+        public SearchController(ISearchUrl searchUrl)
         {
             _searchUrl = searchUrl;
         }

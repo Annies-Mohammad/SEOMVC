@@ -12,12 +12,12 @@ namespace SEO.API.FunctionalTests.SearchAPITests
     {
         readonly HttpClient _client;
         private const string SearchKeyword = "InfoTrack";
-        private readonly Mock<ISearchURL> _mockSearchUrl;
+        private readonly Mock<ISearchUrl> _mockSearchUrl;
 
         public SearchApiTest(TestFixture<Startup> fixture)
         {
             _client = fixture.GetClient();
-            _mockSearchUrl = new Mock<ISearchURL>();
+            _mockSearchUrl = new Mock<ISearchUrl>();
         }
 
         [Fact]

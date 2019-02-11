@@ -8,7 +8,7 @@ namespace SEO.BusinessLogicLayer.Dependencies
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<SearchUrl>().As<ISearchURL>();
+            builder.RegisterType<SearchUrl>().As<ISearchUrl>();
         }
     }
 }

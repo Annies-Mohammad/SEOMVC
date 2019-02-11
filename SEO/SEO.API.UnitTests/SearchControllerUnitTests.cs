@@ -9,12 +9,12 @@ namespace SEO.API.UnitTests
 {
    public class SearchControllerUnitTests
     {
-        private Mock<ISearchURL> _mockSearchUrl;
+        private Mock<ISearchUrl> _mockSearchUrl;
         private SearchController _controller;
 
         public SearchControllerUnitTests()
         {
-            _mockSearchUrl=new Mock<ISearchURL>(MockBehavior.Loose);
+            _mockSearchUrl=new Mock<ISearchUrl>(MockBehavior.Loose);
             _controller =new SearchController(_mockSearchUrl.Object);
         }
 
