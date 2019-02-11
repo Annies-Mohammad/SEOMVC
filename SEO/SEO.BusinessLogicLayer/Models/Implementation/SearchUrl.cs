@@ -7,7 +7,8 @@ namespace SEO.BusinessLogicLayer.Models.Implementation
     {
         public string GetSearchUrls(string keywords)
         {
-            throw new NotImplementedException();
+            return "sf";
+            //throw new NotImplementedException();
         }
     }
 }

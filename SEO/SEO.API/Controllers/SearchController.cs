@@ -6,7 +6,7 @@ using SEO.BusinessLogicLayer.Models.Interfaces;
 namespace SEO.API.Controllers
 {
     [Route("Search")]
-    public class SearchController : Controller
+     public class SearchController : Controller
     {
         private readonly ISearchUrl _searchUrl;
 
@@ -15,7 +15,7 @@ namespace SEO.API.Controllers
             _searchUrl = searchUrl;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetSearchPositions")]
         public IActionResult Get(string keywords)
         {
             if (string.IsNullOrWhiteSpace(keywords))
