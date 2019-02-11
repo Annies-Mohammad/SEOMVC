@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SEO.API.Models;
 using SEO.BusinessLogicLayer.Models.Interfaces;
 
 namespace SEO.API.Controllers
@@ -17,7 +18,7 @@ namespace SEO.API.Controllers
         public IActionResult Get(string keywords)
         {
             var listOfUrlPositions = _searchUrl.GetSearchUrls(keywords);
-            return View(listOfUrlPositions);
+            return View(new SearchViewModel { ResultList = listOfUrlPositions??"0" });
         }
     }
 }
