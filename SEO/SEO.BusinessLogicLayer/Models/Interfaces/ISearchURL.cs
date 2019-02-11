@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SEO.BusinessLogicLayer.Models.Interfaces
 {
-   public interface ISearchURL
+   public interface ISearchUrl
    {
        string GetSearchUrls(string keywords);
    }
