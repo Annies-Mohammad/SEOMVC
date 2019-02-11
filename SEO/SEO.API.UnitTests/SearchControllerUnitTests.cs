@@ -13,12 +13,23 @@ namespace SEO.API.UnitTests
 
         public SearchControllerUnitTests()
         {
-            _controller=new SearchController(_mockSearchUrl.Object);
+            _mockSearchUrl=new Mock<ISearchURL>(MockBehavior.Loose);
+            _controller =new SearchController(_mockSearchUrl.Object);
         }
 
         [Fact]
         public void Controller_Construction_Test()
         {
+            //Assert
+            Assert.NotNull(_controller); //or
+            _controller.Should().NotBeNull();
+        }
+
+        [Fact]
+        public void SearchUrl_Should_throw_Error_On_Empty_Keyword()
+        {
+            //Action
+            var response = _controller.Get(" ");
             //Assert
             Assert.NotNull(_controller); //or
             _controller.Should().NotBeNull();
