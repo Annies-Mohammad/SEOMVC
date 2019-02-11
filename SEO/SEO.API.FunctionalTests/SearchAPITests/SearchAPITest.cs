@@ -12,20 +12,29 @@ namespace SEO.API.FunctionalTests.SearchAPITests
     {
         readonly HttpClient _client;
         private const string SearchKeyword = "InfoTrack";
-
+        private readonly Mock<ISearchURL> _mockSearchUrl;
 
         public SearchApiTest(TestFixture<Startup> fixture)
         {
             _client = fixture.GetClient();
+            _mockSearchUrl = new Mock<ISearchURL>();
         }
 
-       [Fact]
+        [Fact]
+        public void Search_Controller_should_Not_Be_Null()
+        {
+            //Act
+            var searchCtrl = new SearchController(_mockSearchUrl.Object);
+                searchCtrl.Should().NotBeNull();
+        }
+
+        [Fact]
         public async Task Search_Controller_Should_Return_Data()
         {
             //Act
-           var url = $"/Search/Get/keywords?{SearchKeyword}";
+            var url = $"/Search/Get/keywords?{SearchKeyword}";
 
-           //Action
+            //Action
             var response = await _client.GetAsync(url).ConfigureAwait(false);
             var stringResult = await response.Content.ReadAsStringAsync();
 
