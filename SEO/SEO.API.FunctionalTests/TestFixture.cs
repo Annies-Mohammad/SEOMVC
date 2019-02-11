@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using System;
+﻿using System;
 using System.IO;
 using System.Net.Http;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
 
-namespace Nivo.API.FunctionalTest.TestSetup
+namespace SEO.API.FunctionalTests
 {
-    /// <summary>
-    /// A test fixture which hosts the target project in an in-memory server.
-    /// </summary>
-    /// <typeparam name="Startup">Target project's startup type</typeparam>
     public class TestFixture<Startup> : IDisposable
     {
         #region Private fields
@@ -22,8 +18,6 @@ namespace Nivo.API.FunctionalTest.TestSetup
 
         #endregion
 
-        #region Public properties
-
         /// <summary>
         /// Client instance
         /// </summary>
@@ -31,19 +25,25 @@ namespace Nivo.API.FunctionalTest.TestSetup
         {
             return _client;
         }
-      
+
+         
+
+        #region Construction
+        
         public TestFixture()
         {
             var builder = new WebHostBuilder()
-                .UseKestrel()
+                //.UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
+               // .UseIISIntegration()
                 .UseStartup(typeof(Startup))
                 .UseApplicationInsights();
 
-            _server = new TestServer(builder);
+             _server = new TestServer(builder);
             _client = _server.CreateClient();
             _client.Timeout = TimeSpan.FromSeconds(120);
+
+            
         }
 
         #endregion
