@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using SEO.API.Controllers;
 using SEO.BusinessLogicLayer.Models.Interfaces;
@@ -26,13 +27,16 @@ namespace SEO.API.UnitTests
         }
 
         [Fact]
-        public void SearchUrl_Should_throw_Error_On_Empty_Keyword()
+        public void SearchUrl_Should_Throw_Error_On_Empty_Keyword()
         {
+            //Act
+            var keyword = "";
             //Action
-            var response = _controller.Get(" ");
+            var response = _controller.Get(keyword);
+
             //Assert
-            Assert.NotNull(_controller); //or
-            _controller.Should().NotBeNull();
+             _controller.Should().NotBeNull();
+             response.Should().BeOfType<BadRequestObjectResult>();
         }
     }
 }
