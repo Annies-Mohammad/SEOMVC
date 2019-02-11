@@ -3,7 +3,7 @@ using SEO.BusinessLogicLayer.Models.Interfaces;
 
 namespace SEO.BusinessLogicLayer.Models.Implementation
 {
-    public class SearchUrl : ISearchURL
+    public class SearchUrl : ISearchUrl
     {
         public string GetSearchUrls(string keywords)
         {
