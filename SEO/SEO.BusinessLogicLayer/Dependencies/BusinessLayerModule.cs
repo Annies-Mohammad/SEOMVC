@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Autofac;
+﻿using Autofac;
 using SEO.BusinessLogicLayer.Models.Implementation;
 using SEO.BusinessLogicLayer.Models.Interfaces;
 

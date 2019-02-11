@@ -6,6 +6,6 @@ namespace SEO.BusinessLogicLayer.Models.Interfaces
 {
    public interface ISearchURL
    {
-       IEnumerable<string> GetSearchUrls(string keywords);
+       string GetSearchUrls(string keywords);
    }
 }

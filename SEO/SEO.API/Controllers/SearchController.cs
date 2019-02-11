@@ -1,18 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using SEO.BusinessLogicLayer.Models.Interfaces;
 
 namespace SEO.API.Controllers
 {
     [Route("Search")]
     public class SearchController : Controller
     {
+        private readonly ISearchURL _searchUrl;
+
+        public SearchController(ISearchURL searchUrl)
+        {
+            _searchUrl = searchUrl;
+        }
+
         [HttpGet]
         public IActionResult Get(string keywords)
         {
-             return View("Get");
+            var listOfUrlPositions = _searchUrl.GetSearchUrls(keywords);
+            return View(listOfUrlPositions);
         }
     }
 }
