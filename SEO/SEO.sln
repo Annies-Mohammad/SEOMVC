@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEO-API", "WebApplication1\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEO.API", "SEO.API\SEO.API.csproj", "{F7975C3E-D77E-4A34-9415-9F04393A911D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEO.BusinessLogicLayer", "SEO.BusinessLogicLayer\SEO.BusinessLogicLayer.csproj", "{03714CD2-E3B7-4B22-BE4F-83E142FC2741}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F7975C3E-D77E-4A34-9415-9F04393A911D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7975C3E-D77E-4A34-9415-9F04393A911D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7975C3E-D77E-4A34-9415-9F04393A911D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03714CD2-E3B7-4B22-BE4F-83E142FC2741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03714CD2-E3B7-4B22-BE4F-83E142FC2741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03714CD2-E3B7-4B22-BE4F-83E142FC2741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03714CD2-E3B7-4B22-BE4F-83E142FC2741}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
