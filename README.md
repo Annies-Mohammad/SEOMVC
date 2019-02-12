@@ -14,10 +14,13 @@ Layers has been Introduced as API,BusinessLogic,Service layers, Servcie layer ho
 API Unit testing and API Fucntional testing ,Business Logic Unit Testing Layers will handle their respctive fucntionality.
 
 Steps to get position of lookup URL
+
 Step1:
   Create Web Request
+  
  Step2:
   Get Response and read response
+  
  Step3:
   Traverse thru response and start reading anchor tags from web results point
 
