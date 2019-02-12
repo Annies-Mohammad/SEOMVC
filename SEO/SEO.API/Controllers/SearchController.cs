@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using SEO.API.Models;
 using SEO.BusinessLogicLayer.Common;
 using SEO.BusinessLogicLayer.Models.Interfaces;
+using SEO.WorkerService.Exceptions;
 
 namespace SEO.API.Controllers
 {
@@ -16,16 +18,27 @@ namespace SEO.API.Controllers
         }
 
         [HttpGet(Name = "GetSearchPositions")]
-        public IActionResult Get(string keywords)
+        public IActionResult Get(SearchViewModel searchViewModel)
         {
-            if (string.IsNullOrWhiteSpace(keywords))
+            try
             {
-                return BadRequest(Constants.INVALID_KEYWORD);
+                if (string.IsNullOrWhiteSpace(searchViewModel.SearchTerm))
+                {
+                    return BadRequest(Constants.INVALID_KEYWORD);
+                }
+
+                var listOfUrlPositions = _searchUrl.GetSearchUrls(searchViewModel.SearchTerm, searchViewModel.Lookup);
+
+                ViewBag.ListOfUrlPositions = listOfUrlPositions ?? "0";
+            }
+            catch (SEOValidationException e)
+            {
+                ViewBag.Error = e.Message;
+                return BadRequest(e.Message);
+
             }
 
-            var listOfUrlPositions = _searchUrl.GetSearchUrls(keywords);
-
-            return View(new SearchViewModel { ResultList = listOfUrlPositions??"0" });
+            return View();
         }
     }
 }

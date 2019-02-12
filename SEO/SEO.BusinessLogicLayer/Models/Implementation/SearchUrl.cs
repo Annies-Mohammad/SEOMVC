@@ -12,11 +12,11 @@ namespace SEO.BusinessLogicLayer.Models.Implementation
         {
             _seoRequestService = seoRequestService;
         }
-        public string GetSearchUrls(string keywords)
+        public string GetSearchUrls(string searchTerm,string lookUp)
         {
-            var request = _seoRequestService.CreateRequest(keywords);
+            var request = _seoRequestService.CreateRequest(searchTerm);
 
-            var matchPositions = _seoRequestService.GetResponse(request);
+            var matchPositions = _seoRequestService.GetResponse(request, lookUp);
 
             return matchPositions;
             //throw new NotImplementedException();

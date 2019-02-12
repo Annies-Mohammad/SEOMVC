@@ -32,7 +32,7 @@ namespace SEO.API.UnitTests
             //Act
             var keyword = "";
             //Action
-            var response = _controller.Get(keyword);
+            var response = _controller.Get(keyword, TODO);
 
             //Assert
              _controller.Should().NotBeNull();

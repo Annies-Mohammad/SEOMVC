@@ -17,6 +17,8 @@ namespace SEO.WorkerService.SEOServiceLogic
             string search = string.Format(ServiceConstants.UrlPrefix, HttpUtility.UrlEncode(searchTerm));
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(search);
+            request.Method ="GET";
+            request.ContentType ="text/html;charset=UTF-8";
 
             //If required
             request.Credentials = CredentialCache.DefaultCredentials;
@@ -24,15 +26,24 @@ namespace SEO.WorkerService.SEOServiceLogic
             return request;
         }
 
-        public string GetResponse(HttpWebRequest request)
+        public string GetResponse(HttpWebRequest request, string lookUp)
         {
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             {
                 using (StreamReader reader = new StreamReader(response.GetResponseStream() ?? throw new InvalidOperationException(ServiceConstants.InvalidOperationMsg), Encoding.ASCII))
                 {
                     string html = reader.ReadToEnd();
-                    var uri = new Uri(ServiceConstants.SearchUrl);
-                    return GetPositions(html, uri);
+                    reader.Close();
+                    try
+                    {
+                        var uri = new Uri($"https://{lookUp}/"); //ServiceConstants.LookUpUrl;
+
+                        return GetPositions(html, uri);
+                    }
+                    catch
+                    {
+                        throw new InvalidDataException($"Look Up value is invalid pass valid Uri : www.xxxxx.xxx or www.xxxxx.xxx.xx");
+                    }
                 }
             }
         }
@@ -59,6 +70,7 @@ namespace SEO.WorkerService.SEOServiceLogic
                 string value = m.Groups[1].Value;
                 var i = "";
                 count++;
+                if (count > 100) break;
 
                 //Get href attribute.
                 Match m2 = Regex.Match(value, @"href=\""(.*?)\""",
@@ -68,7 +80,7 @@ namespace SEO.WorkerService.SEOServiceLogic
                     i = m2.Groups[1].Value;
                 }
 
-                if (i.Contains(ServiceConstants.SearchUrl))
+                if (i.Contains(ServiceConstants.LookUpUrl))
                     listPositions.Add(count);
 
             }

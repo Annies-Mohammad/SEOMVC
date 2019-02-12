@@ -6,6 +6,6 @@ namespace SEO.WorkerService.Interfaces
    {
        HttpWebRequest CreateRequest(string searchTerm);
 
-       string GetResponse(HttpWebRequest request);
+       string GetResponse(HttpWebRequest request, string lookUp);
    }
 }
