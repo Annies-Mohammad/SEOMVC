@@ -8,7 +8,7 @@
 <tr class="form-group">
     @using (Html.BeginForm("Get", "Search", new { SearchTerm = "online title search", Lookup = "www.infotrack.com.au" }, FormMethod.Get))
     {
-        <table align="center" style="border: black 1px solid">
+        <table align="center" style="border: black 1px solid; position: relative;width: 80%">
             <tr style="background: white">
                 <td align="center">
                     <img src="~/images/download.png" style="width: 100px" />
@@ -24,7 +24,7 @@
             <tr>
                 <td align="left">
                     @Html.Label("Look Up Url :")
-                    @Html.TextBox("lookUp", "www.infotrack.com.au", new { @readonly = "readonly" })
+                    @Html.TextBox("lookUp", "www.infotrack.com.au")
                 </td>
             </tr>
             <tr>
