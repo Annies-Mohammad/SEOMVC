@@ -13,6 +13,7 @@ namespace SEO.API
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
+                .UseUrls("http://localhost:60000/")
                 .Build();
 
             host.Run();
