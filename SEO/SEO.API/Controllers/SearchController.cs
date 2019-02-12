@@ -7,6 +7,9 @@ using SEO.WorkerService.Exceptions;
 
 namespace SEO.API.Controllers
 {
+    /// <summary>
+    /// Controller to provide end point to get feature
+    /// </summary>
     [Route("Search")]
      public class SearchController : Controller
     {
@@ -17,6 +20,11 @@ namespace SEO.API.Controllers
             _searchUrl = searchUrl;
         }
 
+        /// <summary>
+        /// Get to take search term and lookup url - fetch positions of look up url 
+        /// </summary>
+        /// <param name="searchViewModel"> holds search term and lookup</param>
+        /// <returns></returns>
         [HttpGet(Name = "GetSearchPositions")]
         public IActionResult Get(SearchViewModel searchViewModel)
         {
