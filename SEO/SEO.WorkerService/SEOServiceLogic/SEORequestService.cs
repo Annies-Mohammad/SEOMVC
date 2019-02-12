@@ -17,8 +17,8 @@ namespace SEO.WorkerService.SEOServiceLogic
             string search = string.Format(ServiceConstants.UrlPrefix, HttpUtility.UrlEncode(searchTerm));
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(search);
-            request.Method ="GET";
-            request.ContentType ="text/html;charset=UTF-8";
+            request.Method = "GET";
+            request.ContentType = "text/html;charset=UTF-8";
 
             //If required
             request.Credentials = CredentialCache.DefaultCredentials;
@@ -30,34 +30,43 @@ namespace SEO.WorkerService.SEOServiceLogic
         {
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             {
-                using (StreamReader reader = new StreamReader(response.GetResponseStream() ?? throw new InvalidOperationException(ServiceConstants.InvalidOperationMsg), Encoding.ASCII))
+                if (response.StatusCode.Equals(HttpStatusCode.OK))
                 {
-                    string html = reader.ReadToEnd();
-                    reader.Close();
-                    try
+                    using (StreamReader reader = new StreamReader(
+                        response.GetResponseStream() ??
+                        throw new InvalidOperationException(ServiceConstants.InvalidOperationMsg), Encoding.ASCII))
                     {
-                        var uri = new Uri($"https://{lookUp}/"); //ServiceConstants.LookUpUrl;
+                        string html = reader.ReadToEnd();
+                        reader.Close();
+                        try
+                        {
+                            var uri = new Uri($"https://{lookUp}/"); //ServiceConstants.LookUpUrl;
 
-                        return GetPositions(html, uri);
-                    }
-                    catch
-                    {
-                        throw new InvalidDataException($"Look Up value is invalid pass valid Uri : www.xxxxx.xxx or www.xxxxx.xxx.xx");
+                            return GetPositions(html, uri);
+                        }
+                        catch
+                        {
+                            throw new InvalidDataException(
+                                $"Look Up value is invalid pass valid Uri : www.xxxxx.xxx or www.xxxxx.xxx.xx");
+                        }
                     }
                 }
+
+                return "Bad Request";
             }
         }
 
-        public string GetPositions(string html, Uri url)
+
+        public string GetPositions(string html, Uri uri)
         {
-            var positions = FindURLPosition(html);
+            var positions = FindURLPosition(html, uri);
 
             var matchers = string.Join(",", positions);
 
             return matchers.Length > 0 ? matchers : "0";
         }
 
-        private IList<int> FindURLPosition(string input)
+        private IList<int> FindURLPosition(string input, Uri uri )
         {
             List<int> listPositions = new List<int>();
             int count = 0;
@@ -80,7 +89,7 @@ namespace SEO.WorkerService.SEOServiceLogic
                     i = m2.Groups[1].Value;
                 }
 
-                if (i.Contains(ServiceConstants.LookUpUrl))
+                if (i.Contains(uri.Host))
                     listPositions.Add(count);
 
             }
