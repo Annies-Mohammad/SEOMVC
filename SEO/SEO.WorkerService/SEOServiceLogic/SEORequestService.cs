@@ -19,7 +19,6 @@ namespace SEO.WorkerService.SEOServiceLogic
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(search);
             request.Method = "GET";
-            request.ContentType = "application/json";
 
             //If required
             request.Credentials = CredentialCache.DefaultCredentials;
