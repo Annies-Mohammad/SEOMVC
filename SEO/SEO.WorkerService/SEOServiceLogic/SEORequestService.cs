@@ -39,13 +39,13 @@ namespace SEO.WorkerService.SEOServiceLogic
                     {
                         string html = reader.ReadToEnd();
 
-                        var webresults = html.Split(new string[] { "ires" }, StringSplitOptions.None);
+                        var results = html.Split(new string[] { "ires" }, StringSplitOptions.None);
 
-                        html = webresults[1] ?? html;
+                        html = results[1] ?? html;
 
                         try
                         {
-                            var uri = new Uri($"https://{lookUp}/"); //ServiceConstants.LookUpUrl;
+                            var uri = new Uri($"https://{lookUp}/"); 
 
                             return GetPositions(html, uri);
                         }
