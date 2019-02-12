@@ -19,7 +19,7 @@ namespace SEO.WorkerService.SEOServiceLogic
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(search);
             request.Method = "GET";
-            request.ContentType = "text/html;charset=UTF-8";
+            request.ContentType = "application/json";
 
             //If required
             request.Credentials = CredentialCache.DefaultCredentials;
@@ -38,7 +38,11 @@ namespace SEO.WorkerService.SEOServiceLogic
                         throw new SEOValidationException(ServiceConstants.InvalidOperationMsg), Encoding.ASCII))
                     {
                         string html = reader.ReadToEnd();
-                        reader.Close();
+
+                        var webresults = html.Split(new string[] { "ires" }, StringSplitOptions.None);
+
+                        html = webresults[1] ?? html;
+
                         try
                         {
                             var uri = new Uri($"https://{lookUp}/"); //ServiceConstants.LookUpUrl;
@@ -67,7 +71,7 @@ namespace SEO.WorkerService.SEOServiceLogic
             return matchers.Length > 0 ? matchers : "0";
         }
 
-        private IList<int> FindURLPosition(string input, Uri uri )
+        private IList<int> FindURLPosition(string input, Uri uri)
         {
             List<int> listPositions = new List<int>();
             int count = 0;
