@@ -15,6 +15,7 @@ namespace SEO.WorkerService.SEOServiceLogic
     {
         public HttpWebRequest CreateRequest(string searchTerm)
         {
+            //Get request  Uri string ready
             string search = string.Format(ServiceConstants.UrlPrefix, HttpUtility.UrlEncode(searchTerm));
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(search);
@@ -38,12 +39,14 @@ namespace SEO.WorkerService.SEOServiceLogic
                     {
                         string html = reader.ReadToEnd();
 
+                        //read from web results to ignore previous anchor tags
                         var results = html.Split(new string[] { "ires" }, StringSplitOptions.None);
 
                         html = results[1] ?? html;
 
                         try
                         {
+                            //Get looup URi ready
                             var uri = new Uri($"https://{lookUp}/"); 
 
                             return GetPositions(html, uri);
@@ -93,7 +96,8 @@ namespace SEO.WorkerService.SEOServiceLogic
                     i = m2.Groups[1].Value;
                 }
 
-                if (i.Contains(uri.Host))
+                //Find match
+                if (i.Contains(uri.Host)) 
                     listPositions.Add(count);
 
             }

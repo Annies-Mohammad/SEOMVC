@@ -8,24 +8,19 @@ namespace SEO.BusinessLogicLayer.Models.Implementation
     public class SearchUrl : ISearchUrl
     {
         private readonly ISEORequestService _seoRequestService;
+
         public SearchUrl(ISEORequestService seoRequestService)
         {
             _seoRequestService = seoRequestService;
         }
-        public string GetSearchUrls(string searchTerm,string lookUp)
+
+        public string GetSearchUrls(string searchTerm, string lookUp)
         {
-            try
-            {
-                var request = _seoRequestService.CreateRequest(searchTerm);
+            var request = _seoRequestService.CreateRequest(searchTerm);
 
-                var matchPositions = _seoRequestService.GetResponse(request, lookUp);
+            var matchPositions = _seoRequestService.GetResponse(request, lookUp);
 
-                return matchPositions;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return matchPositions;
         }
     }
 }
