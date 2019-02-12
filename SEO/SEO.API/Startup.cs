@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SEO.BusinessLogicLayer.Dependencies;
+using SEO.WorkerService.Dependencies;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace SEO.API
@@ -56,7 +57,7 @@ namespace SEO.API
             //register Autofac modules for IoC
             var builder = new ContainerBuilder();
             builder.RegisterModule<BusinessLayerModule>();
-
+            builder.RegisterModule<ServiceLayerModule>();
             builder.Populate(services);
 
             var container = builder.Build();

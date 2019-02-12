@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SEO.BusinessLogicLayer\SEO.BusinessLogicLayer.csproj" />
+    <ProjectReference Include="..\SEO.WorkerService\SEO.WorkerService.csproj" />
   </ItemGroup>
 
 </Project>

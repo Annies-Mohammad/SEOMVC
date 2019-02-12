@@ -8,8 +8,4 @@
     <PackageReference Include="Autofac" Version="4.9.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SEO.WorkerService\SEO.WorkerService.csproj" />
-  </ItemGroup>
-
 </Project>
