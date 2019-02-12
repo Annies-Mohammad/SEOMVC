@@ -27,14 +27,17 @@ namespace SEO.API.UnitTests
             _controller.Should().NotBeNull();
         }
 
-        [Fact]
-        public void SearchUrl_Should_Throw_Error_On_Empty_Keyword()
+        [Theory]
+        [InlineData("","www.infotrack.com.au")]
+        [InlineData("","")]
+        [InlineData("online title search","")]
+        public void SearchUrl_Should_Throw_Error_On_Empty_Keyword(string searchTerm,string lookup)
         {
             //Act
             var model = new SearchViewModel
             {
-                SearchTerm = "",
-                Lookup = ""
+                SearchTerm = searchTerm,
+                Lookup = lookup
             };
            
             //Action
@@ -43,6 +46,27 @@ namespace SEO.API.UnitTests
             //Assert
              _controller.Should().NotBeNull();
              response.Should().BeOfType<BadRequestObjectResult>();
+        }
+
+        [Theory]
+        [InlineData("online title search", "www.infotrack.com.au")]
+        [InlineData("online title search", "infotrack")]
+        public void SearchUrl_Should_Return_Valid_positions(string searchTerm, string lookup)
+        {
+            //Act
+            var model = new SearchViewModel
+            {
+                SearchTerm = searchTerm,
+                Lookup = lookup
+            };
+
+            //Action
+            var response = _controller.Get(model);
+
+            //Assert
+            Assert.NotNull(_controller);
+            Assert.Equal(typeof(ViewResult).FullName,response.GetType().FullName);
+             
         }
     }
 }

@@ -11,7 +11,6 @@ namespace SEO.API.FunctionalTests.SearchAPITests
     public class SearchApiTest : IClassFixture<TestFixture<Startup>>
     {
         readonly HttpClient _client;
-        private const string SearchKeyword = "InfoTrack";
         private readonly Mock<ISearchUrl> _mockSearchUrl;
 
         public SearchApiTest(TestFixture<Startup> fixture)
@@ -25,14 +24,14 @@ namespace SEO.API.FunctionalTests.SearchAPITests
         {
             //Act
             var searchCtrl = new SearchController(_mockSearchUrl.Object);
-                searchCtrl.Should().NotBeNull();
+            searchCtrl.Should().NotBeNull();
         }
 
         [Fact]
         public async Task Search_Controller_Should_Return_Data()
         {
             //Act
-            var url = $"/Search/Get/keywords?{SearchKeyword}";
+            var url = $"/Search?searchTerm=online+title+search&lookUp=www.infotrack.com.au";
 
             //Action
             var response = await _client.GetAsync(url).ConfigureAwait(false);
