@@ -22,7 +22,11 @@ namespace SEO.API.Controllers
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(searchViewModel.SearchTerm))
+                if (!(ModelState.IsValid))
+                {
+                    return BadRequest(Constants.INVALID_KEYWORD);
+                }
+                if (string.IsNullOrWhiteSpace(searchViewModel.SearchTerm) || string.IsNullOrWhiteSpace(searchViewModel.Lookup))
                 {
                     return BadRequest(Constants.INVALID_KEYWORD);
                 }
@@ -35,7 +39,6 @@ namespace SEO.API.Controllers
             {
                 ViewBag.Error = e.Message;
                 return BadRequest(e.Message);
-
             }
 
             return View();

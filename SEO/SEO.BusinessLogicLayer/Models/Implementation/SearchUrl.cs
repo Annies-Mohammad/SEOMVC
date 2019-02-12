@@ -14,12 +14,18 @@ namespace SEO.BusinessLogicLayer.Models.Implementation
         }
         public string GetSearchUrls(string searchTerm,string lookUp)
         {
-            var request = _seoRequestService.CreateRequest(searchTerm);
+            try
+            {
+                var request = _seoRequestService.CreateRequest(searchTerm);
 
-            var matchPositions = _seoRequestService.GetResponse(request, lookUp);
+                var matchPositions = _seoRequestService.GetResponse(request, lookUp);
 
-            return matchPositions;
-            //throw new NotImplementedException();
+                return matchPositions;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

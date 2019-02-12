@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using SEO.API.Controllers;
+using SEO.API.Models;
 using SEO.BusinessLogicLayer.Models.Interfaces;
 using Xunit;
 
@@ -30,9 +31,14 @@ namespace SEO.API.UnitTests
         public void SearchUrl_Should_Throw_Error_On_Empty_Keyword()
         {
             //Act
-            var keyword = "";
+            var model = new SearchViewModel
+            {
+                SearchTerm = "",
+                Lookup = ""
+            };
+           
             //Action
-            var response = _controller.Get(keyword, TODO);
+            var response = _controller.Get(model);
 
             //Assert
              _controller.Should().NotBeNull();

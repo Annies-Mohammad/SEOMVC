@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using SEO.WorkerService.Constants;
+using SEO.WorkerService.Exceptions;
 using SEO.WorkerService.Interfaces;
 
 namespace SEO.WorkerService.SEOServiceLogic
@@ -34,7 +35,7 @@ namespace SEO.WorkerService.SEOServiceLogic
                 {
                     using (StreamReader reader = new StreamReader(
                         response.GetResponseStream() ??
-                        throw new InvalidOperationException(ServiceConstants.InvalidOperationMsg), Encoding.ASCII))
+                        throw new SEOValidationException(ServiceConstants.InvalidOperationMsg), Encoding.ASCII))
                     {
                         string html = reader.ReadToEnd();
                         reader.Close();
@@ -46,7 +47,7 @@ namespace SEO.WorkerService.SEOServiceLogic
                         }
                         catch
                         {
-                            throw new InvalidDataException(
+                            throw new SEOValidationException(
                                 $"Look Up value is invalid pass valid Uri : www.xxxxx.xxx or www.xxxxx.xxx.xx");
                         }
                     }
